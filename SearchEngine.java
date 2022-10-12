@@ -1,28 +1,43 @@
 import java.io.IOException;
 import java.net.URI;
+import java.util.ArrayList;
 
 class Handler implements URLHandler {
     // The one bit of state on the server: a number that will be manipulated by
     // various requests.
     int num = 0;
+    ArrayList<String> items = new ArrayList<String>();
+    ArrayList<String> elements = new ArrayList<String>();
 
     public String handleRequest(URI url) {
+      //  ArrayList<String> items = new ArrayList<String>();
         if (url.getPath().equals("/")) {
             return String.format("Search for something or add it to the list!");
         } else if (url.getPath().contains("/search")) {
             String[] trySearch = url.getQuery().split("=");
+            elements.clear();
             if (trySearch[0].equals("s")) {
-                return String.format("searched: %s", trySearch[1]);
+                if (items.contains(trySearch[1])) {
+                    for (String element : items){
+                        if(element.contains(trySearch[1])) {
+                            elements.add(element);
+                        }
+                    }
+                    return String.format("Found These: '%s'", elements);
+                }
+                return String.format("searched: '%s'. Found no results, add it to the list.", trySearch[1]);
             }
-          //  num += 1;
-           // return String.format("Number incremented!");
+            else {
+                return String.format("Can't Search.");
+            }
+
         } else {
             System.out.println("Path: " + url.getPath());
             if (url.getPath().contains("/add")) {
                 String[] parameters = url.getQuery().split("=");
                 if (parameters[0].equals("s")) {
-                    //num += Integer.parseInt(parameters[1]);
-                    return String.format("Added '%s'.", parameters[1]);
+                    items.add(parameters[1]);
+                    return String.format("Added '%s'. Here are the items: %s", parameters[1], items);
                 }
             }
             return "404 Not Found!";
