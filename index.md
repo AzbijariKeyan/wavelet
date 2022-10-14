@@ -81,6 +81,19 @@ Here are screenshots of what the page looks like with the url in frame: ![Image]
 ***
 
 ## Bugs (Part 2)
+***
+
+The first bug I saw was in `ArrayExamples.java`. The test I ran to exploit this bug was:
+```
+@Test
+  public void testReversed2() {
+    int[] input1 = {1, 2, 3};
+    assertArrayEquals(new int[]{3, 2, 1}, ArrayExamples.reversed(input1)); 
+  }
+```
+The output I recieved from this test was, “arrays first differed at element [0]; expected:<1> but was:<0>”.
+The bug is `arr[i] = newArray[arr.length - i - 1];`, this will always put 0 into the array.
+The test was expecting the arrays to be switched, but instead the bug will put 0 into the array instead because there is nothing in `newArray`.
 
 
 
