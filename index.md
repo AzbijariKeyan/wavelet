@@ -72,11 +72,11 @@ and "broke". I only added each of these strings once but I get this: ![Image](ht
 handleRequest method, and specifically the `else` statement at the end of it. The argument of handleRequest is the url of the page I am using, I think. The
 url changes, when I want to add something to the list. It changes before anything happens in code.
 
-My Search works fine and gives me an output like this: ![Image](https://azbijarikeyan.github.io/cs15l-lab-reports/searched.png) For `/search` I am using the 
+My Search works fine and gives me an output like this: ![Image](https://azbijarikeyan.github.io/cse15l-lab-reports/searched.png) For `/search` I am using the 
 handleRequest method, and specifically the `if` and the `else-if` statements. The argument of handleRequest is the url of the page I am using. The url, 
 changes when I want to search for something in the list. It changes before anything happens in code.
 
-Here are screenshots of what the page looks like with the url in frame: ![Image](https://azbijarikeyan.github.io/cs15l-lab-reports/URL.png)
+Here are screenshots of what the page looks like with the url in frame: ![Image](https://azbijarikeyan.github.io/cse15l-lab-reports/URL.png)
 
 ***
 
