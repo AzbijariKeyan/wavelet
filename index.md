@@ -95,7 +95,14 @@ The output I recieved from this test was, “arrays first differed at element [0
 The bug is `arr[i] = newArray[arr.length - i - 1];`, this will always put 0 into the array.
 The test was expecting the arrays to be switched, but instead the bug will put 0 into the array instead because there is nothing in `newArray`.
 
+The second bug I saw was in `ListExamples.java`. The test I ran to exploit this bug was:
+```
 
+```
+The output i recieved from this test was, "".
+The bug is `List<String> result = new ArrayList<>();`, this doesn't specify the type in between the <> after `new ArrayList`. 
+The test was expecting the array lists to return a list in the same order as the original just without the "false" strings. But instead we don't 
+get anything at all because we didn't specify the type.
 
 
 
