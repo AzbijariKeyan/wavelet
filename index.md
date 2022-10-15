@@ -97,12 +97,30 @@ The test was expecting the arrays to be switched, but instead the bug will put 0
 
 The second bug I saw was in `ListExamples.java`. The test I ran to exploit this bug was:
 ```
+@Test
+    public void testMerge() {
+        List<String> input1 = new ArrayList<>();
+        List<String> input2 = new ArrayList<>();
+        List<String> expected = new ArrayList<>();
+        input1.add("a");
+        input1.add("c");
+        input2.add("b");
+        input2.add("d");
+        expected.add("a");
+        expected.add("b");
+        expected.add("c");
+        expected.add("d");
+       // ListExamples.merge(input1, input2);
+        assertEquals(expected, ListExamples.merge(input1, input2));
 
+
+    }
 ```
-The output i recieved from this test was, "".
-The bug is `List<String> result = new ArrayList<>();`, this doesn't specify the type in between the <> after `new ArrayList`. 
-The test was expecting the array lists to return a list in the same order as the original just without the "false" strings. But instead we don't 
-get anything at all because we didn't specify the type.
+The output I recieved from this test was, "OutOfMemoryError: Java heap space".
+The bug is `index1 += 1` in the third `while` loop, this should be `index2 += 1` instead. 
+The test was expecting a return of [a,b,c,d] but instead because of the incorrect `while` loop we will always enter an infinite loop before we return 
+anything. It wouldn't matter what you input, at the third `while` loop the program will always enter an infinite loop, unless after the first `while` loop
+`index2` is already larger than `list2`.
 
 
 
